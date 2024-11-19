@@ -18,13 +18,7 @@ const allowedOrigins = process.env.ORIGIN.split(","); // Parse multiple origins 
 
 app.use(
   cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
+    origin: 'https://flexchat-t9ka.onrender.com', // Only allow requests from your deployed frontend
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     credentials: true,
   })
