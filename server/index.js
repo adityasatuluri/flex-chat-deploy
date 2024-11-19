@@ -14,7 +14,6 @@ const port = process.env.PORT || 7070;
 const databaseURL = process.env.DATABASE_URL;
 
 
-import cookieParser from "cookie-parser";
 app.use(cookieParser());
 
 app.use(
