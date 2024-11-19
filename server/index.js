@@ -9,12 +9,13 @@ import setupSocket from "./socket.js";
 import messagesRoutes from "./routes/MessagesRoutes.js";
 
 dotenv.config();
-
 const app = express();
 const port = process.env.PORT || 7070;
 const databaseURL = process.env.DATABASE_URL;
 
-const allowedOrigins = process.env.ORIGIN.split(","); // Parse multiple origins from .env
+
+import cookieParser from "cookie-parser";
+app.use(cookieParser());
 
 app.use(
   cors({
