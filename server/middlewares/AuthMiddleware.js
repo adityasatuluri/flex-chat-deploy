@@ -9,6 +9,8 @@ export const verifyToken = (req, res, next) => {
   console.log("Cookies:", req.cookies);
 
   if (!token) {
+    req.userId = decoded.userId;
+    next();
     return res.status(401).send("You are not authenticated!");
   }
 
