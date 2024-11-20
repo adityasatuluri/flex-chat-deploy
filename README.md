@@ -111,6 +111,11 @@ Modify the `.env` file in the `server` directory by replacing the following envi
 - Ensure MongoDB is running and accessible from your development environment.
 - Update any relevant configurations in the client and server as needed.
 
+
+## Deployment Links:
+- **Client** https://flexchat-t9ka.onrender.com
+- **Server** https://flex-chat-backend.onrender.com
+
 ## 👨‍💻 Developed by
 
 - **Aditya Satuluri** 🚀
