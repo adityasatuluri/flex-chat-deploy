@@ -138,7 +138,7 @@ const MessageContainer = () => {
                 }}
               >
                 <img
-                  src={`${HOST}${message.fileUrl}`}
+                  src={`${HOST}/${message.fileUrl}`}
                   height={200}
                   width={300}
                 />
