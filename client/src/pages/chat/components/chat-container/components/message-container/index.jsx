@@ -81,7 +81,7 @@ const MessageContainer = () => {
   const downloadFile = async (url) => {
     setIsDownloading(true);
     setFileDownloadProgress(0);
-    const response = await apiClient.get(`${HOST}${url}`, {
+    const response = await apiClient.get(`${HOST}/${url}`, {
       responseType: "blob",
       onDownloadProgress: (ProgressEvent) => {
         const { loaded, total } = ProgressEvent;
@@ -175,7 +175,7 @@ const MessageContainer = () => {
         <div className="fixed z-[1000] top-0 left-0 h-[100vh] w-[100vw] flex items-center justify-center backdrop-blur-lg flex-col">
           <div>
             <img
-              src={`${HOST}${imageURL}`}
+              src={`${HOST}/${imageURL}`}
               className="h-[80vh] w-full bg-cover"
             />
             <div className="flex gap-5 fixed top-0 mt-5">
