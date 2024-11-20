@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 export const verifyToken = (req, res, next) => {
-  const token = req.cookies.jwt;
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkaUBvdXRsb29rLmNvbSIsInVzZXJJZCI6IjY3M2M5MGRlZjY5YTVkZGE5NjBmNTY0NyIsImlhdCI6MTczMjA4MjM3NSwiZXhwIjoxOTkxMjgyMzc1fQ.RiEqyyuzGaI4-t-929wTkwRXX0KwFKBD6zw_pGEZamo";
   // req.userId = decoded.userId;
   // next();
 
@@ -9,8 +9,6 @@ export const verifyToken = (req, res, next) => {
   console.log("Cookies:", req.cookies);
 
   if (!token) {
-    req.userId = decoded.userId;
-    next();
     return res.status(401).send("You are not authenticated!");
   }
 
