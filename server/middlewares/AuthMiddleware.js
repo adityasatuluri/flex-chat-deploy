@@ -1,22 +1,38 @@
 import jwt from "jsonwebtoken";
 
+/**
+ * Middleware to verify the JWT token from cookies.
+ * Ensures the user is authenticated before proceeding.
+ */
 export const verifyToken = (req, res, next) => {
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkaUBvdXRsb29rLmNvbSIsInVzZXJJZCI6IjY3M2M5MGRlZjY5YTVkZGE5NjBmNTY0NyIsImlhdCI6MTczMjA4MjM3NSwiZXhwIjoxOTkxMjgyMzc1fQ.RiEqyyuzGaI4-t-929wTkwRXX0KwFKBD6zw_pGEZamo";
-  // req.userId = decoded.userId;
-  // next();
+  try {
+    // Retrieve the token from cookies
+    const token = req.cookies.jwt;
 
-  console.log("Token:", token);
-  console.log("Cookies:", req.cookies);
+    console.log("Received Token:", token); // Debugging: Log the token
+    console.log("Incoming Cookies:", req.cookies); // Debugging: Log all cookies
 
-  if (!token) {
-    return res.status(401).send("You are not authenticated!");
-  }
-
-  jwt.verify(token, process.env.JWT_KEY, async (err, decoded) => {
-    if (err) {
-      return res.status(403).send("Token is not valid!");
+    // Check if the token is present
+    if (!token) {
+      return res.status(401).json({ message: "You are not authenticated!" });
     }
-    req.userId = decoded.userId;
-    next();
-  });
+
+    // Verify the token
+    jwt.verify(token, process.env.JWT_KEY, (err, decoded) => {
+      if (err) {
+        console.error("Token verification failed:", err); // Debugging: Log error
+        return res.status(403).json({ message: "Token is not valid!" });
+      }
+
+      // Attach user information to the request object
+      req.userId = decoded.userId;
+      console.log("Decoded User ID:", req.userId); // Debugging: Log decoded user ID
+
+      // Proceed to the next middleware or route
+      next();
+    });
+  } catch (error) {
+    console.error("Error in verifyToken middleware:", error); // Debugging: Log unexpected errors
+    res.status(500).json({ message: "Internal Server Error" });
+  }
 };
